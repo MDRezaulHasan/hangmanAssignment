@@ -57,8 +57,8 @@ public class ListnerThread implements Runnable {
 		int Score;
 	}
 
-	private String username = "rezaul";
-	private String password = "1234";
+	private String username = "r";
+	private String password = "r";
 	private Key JWTKey = null;
 
 	private Socket socket = null;
@@ -235,7 +235,12 @@ public class ListnerThread implements Runnable {
 				break;
 		}
 		if (status) {
-			game = new HangmanGame();
+			try {
+				game = new HangmanGame();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			msg = new Message();
 			while (!stop) {
 				System.out.println("Waiting to read data");

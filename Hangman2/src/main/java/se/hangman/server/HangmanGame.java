@@ -1,5 +1,7 @@
 package se.hangman.server;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class HangmanGame {
@@ -14,17 +16,21 @@ public class HangmanGame {
 	public Message msg = null;
 	private String SelectedWord = "";
 	private Random rand = null;
-
-	HangmanGame() {
+	private static List<String> listOfWords = new ArrayList<String>();
+	
+	
+	HangmanGame() throws java.io.IOException {
 		msg = new Message();
 		rand = new Random();
 		msg.Score = 0;
+		listOfWords = new ReadData("/words.txt").getData();
 	}
 
+	
 	public void selectWord() {
-		int listSize = Main.ListOfWords.size();
+		int listSize = listOfWords.size();
 		int randNum = rand.nextInt(listSize);
-		SelectedWord = Main.ListOfWords.get(randNum);
+		SelectedWord = listOfWords.get(randNum);
 		msg.NoOfLetters = SelectedWord.length();
 		msg.NoOfAttemptsLeft = SelectedWord.length();
 

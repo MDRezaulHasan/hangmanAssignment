@@ -1,12 +1,12 @@
-E:\Master_Course\Own_Test\Hangman_2\Hangman2\src\main\java\se\hangman\client\ClientController.java
-E:\Master_Course\Own_Test\Hangman_2\Hangman2\src\main\java\se\hangman\server\ListnerThread.java
-E:\Master_Course\Own_Test\Hangman_2\Hangman2\src\main\java\se\hangman\server\Main.java
-E:\Master_Course\Own_Test\Hangman_2\Hangman2\src\main\java\se\hangman\server\ServSocket.java
-E:\Master_Course\Own_Test\Hangman_2\Hangman2\src\main\java\se\hangman\client\LoginController.java
-E:\Master_Course\Own_Test\Hangman_2\Hangman2\src\main\java\se\hangman\client\Main.java
-E:\Master_Course\Own_Test\Hangman_2\Hangman2\src\main\java\se\hangman\client\ClientModel.java
-E:\Master_Course\Own_Test\Hangman_2\Hangman2\src\main\java\se\hangman\client\GameModel.java
-E:\Master_Course\Own_Test\Hangman_2\Hangman2\src\main\java\se\hangman\client\GameController.java
-E:\Master_Course\Own_Test\Hangman_2\Hangman2\src\main\java\se\hangman\client\ClientSocket.java
-E:\Master_Course\Own_Test\Hangman_2\Hangman2\src\main\java\se\hangman\client\ClientLogin.java
-E:\Master_Course\Own_Test\Hangman_2\Hangman2\src\main\java\se\hangman\server\HangmanGame.java
+/Users/jahangirzafar/Desktop/KTH SE/Semester 1/Period 2/Network Programming/Assignment1/HangManShared/hangmanAssignment/Hangman2/src/main/java/se/hangman/server/ListnerThread.java
+/Users/jahangirzafar/Desktop/KTH SE/Semester 1/Period 2/Network Programming/Assignment1/HangManShared/hangmanAssignment/Hangman2/src/main/java/se/hangman/client/ClientModel.java
+/Users/jahangirzafar/Desktop/KTH SE/Semester 1/Period 2/Network Programming/Assignment1/HangManShared/hangmanAssignment/Hangman2/src/main/java/se/hangman/server/ServSocket.java
+/Users/jahangirzafar/Desktop/KTH SE/Semester 1/Period 2/Network Programming/Assignment1/HangManShared/hangmanAssignment/Hangman2/src/main/java/se/hangman/server/Main.java
+/Users/jahangirzafar/Desktop/KTH SE/Semester 1/Period 2/Network Programming/Assignment1/HangManShared/hangmanAssignment/Hangman2/src/main/java/se/hangman/client/ClientSocket.java
+/Users/jahangirzafar/Desktop/KTH SE/Semester 1/Period 2/Network Programming/Assignment1/HangManShared/hangmanAssignment/Hangman2/src/main/java/se/hangman/client/Main.java
+/Users/jahangirzafar/Desktop/KTH SE/Semester 1/Period 2/Network Programming/Assignment1/HangManShared/hangmanAssignment/Hangman2/src/main/java/se/hangman/client/LoginController.java
+/Users/jahangirzafar/Desktop/KTH SE/Semester 1/Period 2/Network Programming/Assignment1/HangManShared/hangmanAssignment/Hangman2/src/main/java/se/hangman/server/HangmanGame.java
+/Users/jahangirzafar/Desktop/KTH SE/Semester 1/Period 2/Network Programming/Assignment1/HangManShared/hangmanAssignment/Hangman2/src/main/java/se/hangman/client/GameModel.java
+/Users/jahangirzafar/Desktop/KTH SE/Semester 1/Period 2/Network Programming/Assignment1/HangManShared/hangmanAssignment/Hangman2/src/main/java/se/hangman/client/ClientController.java
+/Users/jahangirzafar/Desktop/KTH SE/Semester 1/Period 2/Network Programming/Assignment1/HangManShared/hangmanAssignment/Hangman2/src/main/java/se/hangman/client/GameController.java
+/Users/jahangirzafar/Desktop/KTH SE/Semester 1/Period 2/Network Programming/Assignment1/HangManShared/hangmanAssignment/Hangman2/src/main/java/se/hangman/client/ClientLogin.java

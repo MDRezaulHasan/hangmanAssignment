@@ -1,19 +1,13 @@
 package se.hangman.server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
 	private static ServSocket servSocket = null;
 	public static Scanner userInput = new Scanner(System.in);
-	public static List<String> ListOfWords = new ArrayList<String>();
+	
 
 	public static int userInput() {
 		try {
@@ -39,23 +33,8 @@ public class Main {
 		}
 	}
 
-	public static void loadFile(String file) {
-		try {
-			InputStream inputStream = Main.class.getResourceAsStream(file);
-			InputStreamReader in = new InputStreamReader(inputStream);
-			BufferedReader br = new BufferedReader(in);
-			String line;
-			while ((line = br.readLine()) != null) {
-				ListOfWords.add(line);
-			}
-			in.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
 	public static void main(String[] args) {
-		loadFile("/words.txt");
 		System.out.println("Starting Server");
 		int port = getPort();
 		servSocket = new ServSocket(port);
