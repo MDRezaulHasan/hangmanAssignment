@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 
 public class ClientController {
 
-	public static ClientModel clientModel = new ClientModel();
+	public static ClientModel clientModel = null;
 
 	@FXML
 	private TextField textIp;
@@ -29,10 +29,10 @@ public class ClientController {
 	@FXML
 	void createPlayer(ActionEvent event) {
 		btnPlay.setDisable(true);
-		String PlayerName = cbPlayerName.getValue();
-		String serverIP = textIp.getText();
-		String serverPort = textPort.getText();
-
+		String PlayerName = "j"; //cbPlayerName.getValue();
+		String serverIP = "127.0.0.1"; //textIp.getText();
+		String serverPort = "1234"; //textPort.getText();
+		
 		if (PlayerName == null || serverIP == null || serverPort == null) {
 			Alert alert = new Alert(AlertType.INFORMATION, "Fields cannot be NULL");
 			alert.showAndWait();
@@ -60,11 +60,21 @@ public class ClientController {
 					"Player Name cannot be Empty...Either enter a new Player Name or select from the drop down");
 			alert.showAndWait();
 		} else {
-			boolean newPlayer = clientModel.createNewPlayerThread(PlayerName, serverIP, port);
-			if (!newPlayer) {
-				Alert alert = new Alert(AlertType.INFORMATION, "Duplicate Player Name or Socket Connection failed");
-				alert.showAndWait();
-			}
+			clientModel = new ClientModel(PlayerName, serverIP, port);
+			new java.util.Timer().schedule( 
+			        new java.util.TimerTask() {
+			            @Override
+			            public void run() {
+			            	boolean newPlayer = clientModel.createNewPlayerThread();
+			    			if (!newPlayer) {
+			    				Alert alert = new Alert(AlertType.INFORMATION, "Duplicate Player Name or Socket Connection failed");
+			    				alert.showAndWait();
+			    			}
+			            }
+			        }, 
+			        500 
+			);
+			
 		}
 		updatePlayersCB();
 		btnPlay.setDisable(false);

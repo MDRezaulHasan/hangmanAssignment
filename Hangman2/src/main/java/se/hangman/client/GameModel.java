@@ -38,7 +38,6 @@ public class GameModel {
 	}
 
 	public String PlayerName;
-	public ClientSocket clientSocket = null;
 	private ObjectMapper Obj = null;
 	private ClientMessage clientMsg = null;
 	public String jwtKey;
@@ -62,44 +61,47 @@ public class GameModel {
 	 * } catch (Exception e) { e.printStackTrace(); } }
 	 */
 
-	public Message sendStartMessage() {
+	public String sendStartMessage() throws IOException {
 		clientMsg.type = "Start";
 		clientMsg.player = PlayerName;
 		clientMsg.guess = "";
 		clientMsg.Key = jwtKey;
-		clientSocket.writeDataToServer(objToJSONString(clientMsg));
-		String serverData = clientSocket.readDataFromServer();
-		if (serverData.compareTo("failed") == 0) {
-			return null;
-		} else {
-			Message msg = JSONStringToObject(serverData);
-			return msg;
-		}
+		
+		return  objToJSONString(clientMsg);
+		
+//		String serverData = "";//clientSocket.readDataFromServer();
+//		if (serverData.compareTo("failed") == 0) {
+//			return null;
+//		} else {
+//			Message msg = JSONStringToObject(serverData);
+//			return msg;
+//		}
 	}
 
-	public Message sendGuessMessage(String guessStr) {
+	public String sendGuessMessage(String guessStr) throws IOException {
 		clientMsg.type = "Guess";
 		clientMsg.player = PlayerName;
 		clientMsg.guess = guessStr;
 		clientMsg.Key = jwtKey;
-		clientSocket.writeDataToServer(objToJSONString(clientMsg));
-		String serverData = clientSocket.readDataFromServer();
-		if (serverData.compareTo("failed") == 0) {
-			return null;
-		} else {
-			Message msg = JSONStringToObject(serverData);
-			return msg;
-		}
+		
+		return objToJSONString(clientMsg);
+		//clientSocket.writeDataToServer(objToJSONString(clientMsg), "c");
+//		String serverData = "";//clientSocket.readDataFromServer();
+//		if (serverData.compareTo("failed") == 0) {
+//			return null;
+//		} else {
+//			Message msg = JSONStringToObject(serverData);
+//			return msg;
+//		}
 	}
 
-	public void sendStopMessage() {
+	public String sendStopMessage() throws IOException {
 		clientMsg.type = "Stop";
 		clientMsg.player = PlayerName;
 		clientMsg.guess = "";
 		clientMsg.Key = jwtKey;
-		clientSocket.writeDataToServer(objToJSONString(clientMsg));
-		clientSocket.close();
-		ClientModel.removeFromPlayersList(PlayerName);
+		return objToJSONString(clientMsg);
+		
 	}
 
 	public Message JSONStringToObject(String jsonString) {

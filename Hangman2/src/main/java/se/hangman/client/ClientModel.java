@@ -16,49 +16,55 @@ public class ClientModel implements Runnable {
 	private String ServerIp;
 	private int ServerPort;
 
-	ClientModel() {
+	ClientModel(String player, String ip, int port) {
 		PlayerName = "";
 		ServerIp = "";
 		ServerPort = 0;
 		PlayersMap = new HashMap<String, ClientSocket>();
 		PlayersList = new ArrayList<String>();
-	}
-
-	public boolean createNewPlayerThread(String player, String ip, int port) {
 		PlayerName = player;
 		ServerIp = ip;
 		ServerPort = port;
+		Thread t = new Thread(this, PlayerName);
+		t.start();
+		}
 
-		if (!PlayersMap.containsKey(player)) {
-			if (socketConnection()) {
-				addToPlayersList(player);
-				Thread t = new Thread(this, PlayerName);
-				t.start();
-				return true;
-			} else {
+	
+	public boolean createNewPlayerThread() {
+		
+		if (!PlayersMap.containsKey(PlayerName)) {
+			if(socketConnection()) {
+				addToPlayersList(PlayerName);
+//				Thread t = new Thread(this, PlayerName);
+//				t.start();
+				Platform.runLater(() -> {
+					// Main.startGameUI(PlayerName, getSocketObject( PlayerName));
+					Main.startLoginUI(PlayerName, getSocketObject(PlayerName));
+				});
+				return cSocket.connected;
+			}
+			else {
 				return false;
 			}
+			
 		} else {
 			return false;
 		}
 	}
 
 	public void run() {
-
-		Platform.runLater(() -> {
-			// Main.startGameUI(PlayerName, getSocketObject( PlayerName));
-			Main.startLoginUI(PlayerName, getSocketObject(PlayerName));
-		});
+		cSocket = new ClientSocket();
+		try {
+			cSocket.connectToServer(ServerIp, ServerPort);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public boolean socketConnection() {
-		try {
-			cSocket = new ClientSocket();
-			cSocket.connectToServer(ServerIp, ServerPort);
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
+		return cSocket.connected;
+		
 	}
 
 	public void addToPlayersList(String player) {

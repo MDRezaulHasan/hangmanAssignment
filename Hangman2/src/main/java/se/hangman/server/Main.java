@@ -1,11 +1,11 @@
 package se.hangman.server;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
 
-	private static ServSocket servSocket = null;
 	public static Scanner userInput = new Scanner(System.in);
 	
 
@@ -37,12 +37,17 @@ public class Main {
 	public static void main(String[] args) {
 		System.out.println("Starting Server");
 		int port = getPort();
-		servSocket = new ServSocket(port);
-		System.out.println("Waiting for a Client to join....");
-		servSocket.createNewListnerThread();
-		while (true) {
-
+		
+		NonblockingServer server = new NonblockingServer(port);
+		try {
+			server.createServer();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		//servSocket = new ServSocket(port);
+		System.out.println("Waiting for a Client to join....");
+		//servSocket.createNewListnerThread();
 
 	}
 

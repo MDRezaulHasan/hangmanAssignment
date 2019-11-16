@@ -14,7 +14,7 @@ public class ClientLogin {
 		String password;
 	}
 
-	public ClientSocket clientSocket = null;
+	
 	private ObjectMapper Obj = null;
 	public String jwtKey = "";
 	public String PlayerName = "";
@@ -25,24 +25,19 @@ public class ClientLogin {
 
 	}
 
-	public int validateLogin(String username, String pswd) {
+	public String validateLogin(String username, String pswd) {
 
 		ClientCredentials cred = new ClientCredentials();
 		cred.username = username;
 		cred.password = pswd;
-		clientSocket.writeDataToServer(objToJSONString(cred));
-		jwtKey = clientSocket.readDataFromServer();
-		if (jwtKey.compareTo("failed") == 0)
-			return -1;
-		else if (jwtKey.compareTo("try") == 0)
-			return 1;
-		else
-			return 0;
+		return objToJSONString(cred);
 	}
 
-	public void startGameUI() {
-		Main.startGameUI(PlayerName, clientSocket, jwtKey);
+	public void successLogin(String key) {
+		this.jwtKey = key;
+		
 	}
+	
 
 	public ClientCredentials JSONStringToObject(String jsonString) {
 

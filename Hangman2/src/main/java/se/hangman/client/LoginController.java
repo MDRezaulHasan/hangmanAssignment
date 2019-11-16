@@ -1,11 +1,14 @@
 package se.hangman.client;
 
+import java.io.IOException;
+
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
@@ -13,7 +16,7 @@ public class LoginController {
 
 	public ClientLogin login = new ClientLogin();
 	public Stage loginStage = null;
-	public int count = 0;
+	public ClientSocket clientSocket = null;
 
 	@FXML
 	private TextField textUser;
@@ -39,26 +42,34 @@ public class LoginController {
 			alert.showAndWait();
 			btnLogin.setDisable(false);
 		} else {
-			int status = login.validateLogin(username, pswd);
-			if (status == 1) {
-				count += 1;
-				Alert alert = new Alert(AlertType.INFORMATION,
-						"Wrong Username or Password... No. of attempts left - " + (3 - count));
-				alert.showAndWait();
-				textUser.setText("");
-				textPass.setText("");
-				btnLogin.setDisable(false);
-			} else if (status == -1) {
-				Alert alert = new Alert(AlertType.INFORMATION,
-						"Wrong Username or Password... No. of attempts left - 0  ... Closing Login WIndow");
-				alert.showAndWait();
-				loginStage.close();
-				login.clientSocket.close();
-				ClientModel.removeFromPlayersList(login.PlayerName);
-			} else {
-				loginStage.close();
-				login.startGameUI();
+			 String loginString = login.validateLogin(username, pswd);
+			 try {
+				clientSocket.writeDataToServerFromLoginController(loginString,"login", this);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+		}
+	}
+	
+	public void response(String recvdString) {
+		System.out.println(recvdString);
+		
+		if (recvdString.equalsIgnoreCase("201")) {
+			Alert alert = new Alert(AlertType.INFORMATION,
+					"Invalid Username or Password...");
+			alert.showAndWait();
+			textUser.setText("");
+			textPass.setText("");
+			btnLogin.setDisable(false);
+		} else {
+			login.jwtKey = recvdString;
+			//loginStage.close();
+			Platform.runLater(() -> {
+				Main.startGameUI(login.PlayerName, this.clientSocket, recvdString);
+			});
+			
+			
 		}
 	}
 

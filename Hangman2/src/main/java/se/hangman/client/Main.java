@@ -54,7 +54,7 @@ public class Main extends Application {
 			stage.show();
 			GameController gc = (GameController) fxmlLoader.getController();
 			gc.gm.PlayerName = player;
-			gc.gm.clientSocket = cs;
+			gc.clientSocket = cs;
 			gc.gm.jwtKey = Key;
 
 		} catch (Exception e) {
@@ -76,7 +76,7 @@ public class Main extends Application {
 			Loginstage.show();
 			LoginController lc = (LoginController) fxmlLoader.getController();
 			lc.loginStage = Loginstage;
-			lc.login.clientSocket = cs;
+			lc.clientSocket = cs;
 			lc.login.PlayerName = player;
 
 		} catch (Exception e) {
